@@ -1,0 +1,40 @@
+﻿<Controls:MetroWindow x:Class="ProcessTracker.MainWindow"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Process Tracker" 
+        Height="600" Width="700" 
+        Name="mainWindow" EnableDWMDropShadow="True"
+        Loaded="mainWindow_Loaded" Closing="mainWindow_Closing"   
+        DataContext="{Binding Source={StaticResource PTManager}}" ResizeMode="NoResize">
+    <Grid Height="auto" Name="grid1" Width="auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="100" Width="100" Name="DateGridWidth" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DataGrid AutoGenerateColumns="False" 
+                  Grid.Column="0" Grid.Row="0" 
+                  Height="{Binding ElementName=grid1, Path=ActualHeight}" 
+                  HorizontalAlignment="Left" 
+                  Name="dateView" 
+                  VerticalAlignment="Top" 
+                  Width="100" ColumnWidth="95" 
+                  IsReadOnly="True" SelectionChanged="dateView_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date, Converter={StaticResource DateConverter}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid AutoGenerateColumns="False" 
+                  Grid.Column="1" Height="{Binding ElementName=grid1, Path=ActualHeight}" 
+                  HorizontalAlignment="Left" 
+                  Name="processInfoView" 
+                  VerticalAlignment="Top" 
+                  Width="580"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="480"/>
+                <DataGridTextColumn Header="Active Time" Binding="{Binding ActiveTime}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Controls:MetroWindow>
